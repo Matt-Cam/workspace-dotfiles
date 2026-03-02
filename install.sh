@@ -5,7 +5,7 @@ set -euo pipefail
 DOTFILES_PATH="$HOME/dotfiles"
 
 # Install packages
-sudo apt-get install -y rsync
+sudo apt-get install -y rsync || true
 
 # Symlink dotfiles to the root within your workspace
 find $DOTFILES_PATH -type f -path "$DOTFILES_PATH/.*" |
