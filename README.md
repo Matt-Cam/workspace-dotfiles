@@ -1,22 +1,24 @@
-# Example dotfiles repo for initializing workspaces
+# matt-cameron-dotfiles
 
-This repository is supposed to be used as a template for dotfiles you
-would like to have added to each new workspace that is created.  To use
-it, first you must create a new personal repository with this specified
-as a template. Go to http://github.com/new and initialize the repo as
-follows
+Personal dotfiles for Matt Cameron's Datadog Workspaces.
 
-![Setting up dotfiles](docs/new_repo_screen.png)
+## What this is
 
-Alternatively, [this link](https://github.com/new?owner=@me&template_name=workspaces-dotfiles-template&template_owner=DataDog&name=dotfiles&visibility=public&description=Home+directory+initialization+for+workspaces)
-will pre-fill the form with valid values.
+This repo is applied automatically when a new workspace is created. It sets up the git identity and workspace-specific git configuration so commits work correctly out of the box.
 
-Once `Create repository` has been selected, clone the new repository locally, modify
-it as appropriate following comments in the provided files. At the very least,
-replace text within `<Angle Brackets>` with values more appropriate to you.
-Commit the changes, push and supply the url of the repository to the `--dotfiles`
-parameter the next time you create a workspace.  This can also be persisted in the
-workspaces configuration file.
+It was set up following [Personalizing Your Workspace](https://datadoghq.atlassian.net/wiki/spaces/DEVX/pages/3068528729/Personalizing+Your+Workspace) and created from the [DataDog/workspaces-dotfiles-template](https://github.com/DataDog/workspaces-dotfiles-template).
 
-See [Getting Started with Workspaces Personalization](https://datadoghq.atlassian.net/wiki/spaces/DEVX/pages/3068528729/Getting+Started+with+Workspaces+Personalization)
-for details.
+## What's included
+
+- `.gitconfig` — git identity (name, email), GitHub SSH URL rewrite, global hooks path for the workspace
+
+## What's not included
+
+- Claude config (`~/.claude`) — too dynamic to version here. Sync manually when needed:
+  ```sh
+  rsync -av ~/.claude/ workspace-<name>:~/.claude/ --exclude='.credentials.json' --exclude='projects/'
+  ```
+
+## Usage
+
+Registered in `~/.config/datadog/workspaces/config.yaml` as `dotfiles: git@github.com:DataDog/matt-cameron-dotfiles` — applied automatically on every `workspaces create`.
